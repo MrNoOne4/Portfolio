@@ -11,6 +11,23 @@ const fontMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
 })
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Mathew De Mesa | Full Stack Developer",
+  description:
+    "Welcome to the portfolio of Mathew A. De Mesa, an aspiring Full Stack Developer and third-year college student showcasing skills, projects, and development experience.",
+  keywords: [
+    "Mathew De Mesa",
+    "Web Developer",
+    "Full Stack Developer",
+    "Next.js",
+    "React",
+    "Portfolio",
+    "Web Development",
+  ],
+  authors: [{ name: "Mathew A. De Mesa" }],
+}
 
 export default function RootLayout({
   children,
