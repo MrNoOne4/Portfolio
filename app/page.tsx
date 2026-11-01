@@ -1,19 +1,49 @@
-import { Button } from "@/components/ui/button"
+"use client"
+
+import { useState, useEffect } from "react"
+import { LoaderIcon } from "lucide-react"
+import Header from "@/components/header";
+import DarkVeil from "@/components/DarkVeil";
+import Content from "@/components/content";
 
 export default function Page() {
+  const [showHello, setShowHello] = useState(true)
+  const [grow, setGrow] = useState(false)
+
+  useEffect(() => {
+    const growTimer = setTimeout(() => {
+      setGrow(true)
+    }, 100)
+
+    const hideTimer = setTimeout(() => {
+      setShowHello(false)
+    }, 100)
+
+    return () => {
+      clearTimeout(growTimer)
+      clearTimeout(hideTimer)
+    }
+  }, [])
+
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
+    <main className="border-box m-0 p-0">
+      <div>
+        {showHello ? (
+          <div className="flex h-screen items-center justify-center">
+            <LoaderIcon
+              className={`animate-spin transition-all duration-[3000ms] ${
+                grow ? "size-32" : "size-4 "
+              }`}
+            />
+            
+          </div>
+        ) : (
+          <div>
+              <Header/>
+              <Content/>
+          </div>
+        )}
       </div>
-    </div>
+    </main>
   )
 }
