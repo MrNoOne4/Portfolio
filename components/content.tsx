@@ -1,50 +1,17 @@
 import { memo, useEffect, useState } from "react"
-import type { ReactNode } from "react"
 import {
-  LayoutGrid,
-  Languages,
-  Monitor,
-  Server,
-  Database,
-  Code2,
-  Wrench,
-  LucideIcon,
-  Code,
-  Palette,
-  Braces,
-  FileCode,
-  Wind,
-  Layers,
-  Atom,
-  Zap,
-  GitBranch,
-  Bot,
-  Sparkles,
-  Triangle,
-  Boxes,
-  Globe,
   UserRound,
   GraduationCap,
   FolderKanban,
   Mail,
   ArrowUpRight,
   ArrowUp,
-  ShieldCheck,
+  Sparkles,
 } from "lucide-react"
-import { FaFacebook, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa"
-import {
-  SiNextdotjs,
-  SiTailwindcss,
-  SiAuth0,
-  SiMysql,
-  SiVercel,
-  SiTypescript,
-  SiJavascript,
-  SiReact,
-  SiNodedotjs,
-} from "react-icons/si"
+import { FaGithub } from "react-icons/fa"
 import { AnimatePresence, motion } from "framer-motion"
 
+import AboutMe from "@/components/about-me"
 import ContactForm from "@/components/contact-form"
 import { Button } from "@/components/ui/button"
 import {
@@ -56,316 +23,33 @@ import {
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CarouselWithThumbnails } from "@/components/carousel"
-
-type Category =
-  "All" | "Languages" | "Frontend" | "Backend" | "Database" | "Tools"
-
-interface ToolProps {
-  name: string
-  value: string
-  icon: LucideIcon
-  description: string
-  role: Category[]
-}
-
-interface ProjectProps {
-  thumbnail: string
-  title: string
-  description: string
-  tools: {
-    titleTools: string
-    icon: ReactNode
-  }[]
-  linkVercel: string
-  linkGithub: string
-  images: string[]
-}
-
-import AboutMe from "@/components/about-me";
-
-
-// Static data lives outside the component so it isn't re-created on every render
-const categories: ReadonlyArray<{ name: Category; icon: LucideIcon }> = [
-  { name: "All", icon: LayoutGrid },
-  { name: "Languages", icon: Languages },
-  { name: "Frontend", icon: Monitor },
-  { name: "Backend", icon: Server },
-  { name: "Database", icon: Database },
-  { name: "Tools", icon: Wrench },
-]
-
-const developmentTools: readonly ToolProps[] = [
-  // Languages
-  {
-    name: "HTML",
-    value: "HTML",
-    icon: Code,
-    description: "Structures web pages with semantic markup.",
-    role: ["All", "Frontend"],
-  },
-  {
-    name: "CSS",
-    value: "CSS",
-    icon: Palette,
-    description: "Styles and designs responsive web interfaces.",
-    role: ["All", "Frontend"],
-  },
-  {
-    name: "Java",
-    value: "Java",
-    icon: Code,
-    description:
-      "A versatile, object-oriented programming language used to build web, mobile, and enterprise applications.",
-    role: ["All", "Backend", "Languages"],
-  },
-  {
-    name: "JavaScript",
-    value: "JavaScript",
-    icon: Braces,
-    description: "Adds interactivity and dynamic behavior to websites.",
-    role: ["All", "Frontend", "Languages"],
-  },
-  {
-    name: "TypeScript",
-    value: "TypeScript",
-    icon: FileCode,
-    description: "Adds static typing to JavaScript applications.",
-    role: ["All", "Frontend", "Languages"],
-  },
-
-  // Frontend
-  {
-    name: "React",
-    value: "React",
-    icon: Atom,
-    description: "Builds interactive user interfaces with reusable components.",
-    role: ["All", "Frontend"],
-  },
-  {
-    name: "Auth.js",
-    value: "Auth.js",
-    icon: ShieldCheck,
-    description: "Handles authentication, sessions, and secure user sign-ins.",
-    role: ["All", "Backend"],
-  },
-  {
-    name: "Next.js",
-    value: "Next.js",
-    icon: Layers,
-    description: "Develops full-stack React applications and websites.",
-    role: ["All", "Frontend"],
-  },
-  {
-    name: "Vite",
-    value: "Vite",
-    icon: Zap,
-    description: "Provides a fast frontend development environment.",
-    role: ["All", "Frontend", "Tools"],
-  },
-  {
-    name: "Tailwind CSS",
-    value: "Tailwind CSS",
-    icon: Wind,
-    description: "Creates modern interfaces using utility-first CSS.",
-    role: ["All", "Frontend"],
-  },
-  {
-    name: "shadcn/ui",
-    value: "shadcn/ui",
-    icon: Layers,
-    description: "Provides customizable and accessible UI components.",
-    role: ["All", "Frontend"],
-  },
-  {
-    name: "Framer Motion",
-    value: "Framer Motion",
-    icon: Sparkles,
-    description: "Creates smooth animations and interactive transitions.",
-    role: ["All", "Frontend"],
-  },
-
-  // Database
-  {
-    name: "MySQL",
-    value: "MySQL",
-    icon: Database,
-    description: "Manages relational data using SQL.",
-    role: ["All", "Database", "Backend"],
-  },
-  {
-    name: "Aiven",
-    value: "Aiven",
-    icon: Database,
-    description: "Provides managed cloud database infrastructure.",
-    role: ["All", "Database", "Backend"],
-  },
-  {
-    name: "OOP",
-    value: "OOP",
-    icon: Boxes,
-    description:
-      "Organizes code using objects, classes, and reusable principles.",
-    role: ["All", "Languages"],
-  },
-  {
-    name: "Prisma",
-    value: "Prisma",
-    icon: Database,
-    description: "Simplifies database access with a type-safe ORM.",
-    role: ["All", "Backend", "Database"],
-  },
-
-  // Development Tools
-  {
-    name: "Git",
-    value: "Git",
-    icon: GitBranch,
-    description: "Tracks changes and manages source code versions.",
-    role: ["All", "Tools"],
-  },
-  {
-    name: "GitHub",
-    value: "GitHub",
-    icon: GitBranch,
-    description: "Hosts repositories and supports collaborative development.",
-    role: ["All", "Tools"],
-  },
-  {
-    name: "MySQL Workbench",
-    value: "MySQL Workbench",
-    icon: Database,
-    description: "Designs, manages, and visualizes MySQL databases.",
-    role: ["All", "Tools", "Database"],
-  },
-  {
-    name: "VS Code",
-    value: "VS Code",
-    icon: Code2,
-    description: "A lightweight editor for writing and managing code.",
-    role: ["All", "Tools"],
-  },
-  {
-    name: "Figma",
-    value: "Figma",
-    icon: Palette,
-    description: "Designs user interfaces and interactive prototypes.",
-    role: ["All", "Tools"],
-  },
-
-  // AI Tools
-  {
-    name: "Claude AI",
-    value: "Claude AI",
-    icon: Bot,
-    description: "Assists with coding, problem-solving, and development.",
-    role: ["All", "Tools"],
-  },
-  {
-    name: "Gemini AI",
-    value: "Gemini AI",
-    icon: Sparkles,
-    description: "Supports research, coding, and creative workflows.",
-    role: ["All", "Tools"],
-  },
-
-  // Deployment
-  {
-    name: "Vercel",
-    value: "Vercel",
-    icon: Triangle,
-    description: "Deploys and hosts modern web applications.",
-    role: ["All", "Tools"],
-  },
-  {
-    name: "Netlify",
-    value: "Netlify",
-    icon: Globe,
-    description: "Builds, deploys, and hosts web projects.",
-    role: ["All", "Tools"],
-  },
-]
-
-const sharedStack: ProjectProps["tools"] = [
-  { titleTools: "Next.js", icon: <SiNextdotjs /> },
-  { titleTools: "TypeScript", icon: <SiTypescript /> },
-  { titleTools: "JavaScript", icon: <SiJavascript /> },
-  { titleTools: "React", icon: <SiReact /> },
-  { titleTools: "Tailwind CSS", icon: <SiTailwindcss /> },
-  { titleTools: "Node.js", icon: <SiNodedotjs /> },
-  { titleTools: "Auth.js", icon: <SiAuth0 /> },
-  { titleTools: "MySQL", icon: <SiMysql /> },
-  { titleTools: "Vercel", icon: <SiVercel /> },
-  { titleTools: "Aiven", icon: <Database /> },
-]
-
-const projects: ReadonlyArray<ProjectProps> = [
-  {
-    thumbnail: "/images/hotelThumbnail.png",
-    title: "Hotel reservation and management system",
-    description:
-      "The Hotel Reservation and Room Management System allows customers to book rooms and process payments while helping hotel staff manage rooms, guests, reservations, check-ins, check-outs, and billing efficiently.",
-    tools: sharedStack,
-    linkVercel: "https://hotel-reservation-n21f.vercel.app/userPage",
-    linkGithub: "https://github.com/MrNoOne4/HotelReservation",
-    images: [
-      "/images/hotelThumbnail.png",
-      "/images/Hotel2.png",
-      "/images/Hotel3.png",
-      "/images/Hotel4.png",
-      "/images/Hotel5.png",
-      "/images/Hotel6.png",
-      "/images/Hotel7.png",
-      "/images/Hotel8.png",
-      "/images/Hotel9.png",
-      "/images/Hotel10.png",
-      "/images/Hotel11.png",
-      "/images/Hotel12.png",
-      "/images/Hotel13.png",
-      "/images/Hotel14.png",
-      "/images/Hotel15.png",
-    ],
-  },
-  {
-    thumbnail: "/images/brewCoffeeThumbnail.png",
-    title: "Coffee & Snacks Ordering and Management Dashboard",
-    description:
-      "A user-friendly dashboard that helps administrators manage coffee and snack menus, customer orders, products, pricing, and sales efficiently, ensuring smooth daily business operations.",
-    tools: sharedStack,
-    linkVercel: "https://brewcoffee.vercel.app/",
-    linkGithub: "https://github.com/MrNoOne4/brewCoffee",
-    images: [
-      "/images/Brew1.png",
-      "/images/Brew2.png",
-      "/images/Brew3.png",
-      "/images/Brew4.png",
-      "/images/Brew5.png",
-      "/images/Brew6.png",
-      "/images/Brew7.png",
-      "/images/Brew8.png",
-      "/images/Brew10.png",
-      "/images/Brew11.png",
-      "/images/Brew12.png",
-      "/images/Brew13.png",
-      "/images/Brew14.png",
-      "/images/Brew15.png",
-      "/images/Brew16.png",
-      "/images/Brew17.png",
-      "/images/Brew18.png",
-      "/images/Brew19.png",
-      "/images/Brew20.png",
-      "/images/Brew21.png",
-    ],
-  },
-]
+import { getIcon } from "@/lib/icons"
+import {
+  categories,
+  tools,
+  certificate,
+  projects,
+  socials,
+  type Category,
+  type Project,
+} from "@/lib/portfolio-data"
+import Marquee from "@/components/shadcn-space/marquee/marquee-04"
 
 const socialLinkClass =
   "flex items-center gap-2 rounded-lg border px-4 py-3 text-sm transition-all hover:-translate-y-1 hover:border-primary/50 hover:bg-muted"
 
+const footerSocials = socials.filter((s) => s.inFooter)
+
+const navLinks = [
+  { name: "About", href: "#about", icon: UserRound },
+  { name: "Skills", href: "#skills", icon: GraduationCap },
+  { name: "Projects", href: "#projects", icon: FolderKanban },
+  { name: "Contact", href: "#contact", icon: Mail },
+]
+
 const Content = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("All")
-  const [selectedProject, setSelectedProject] = useState<ProjectProps | null>(
-    null
-  )
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
 
   const closeCarousel = () => setSelectedProject(null)
 
@@ -388,13 +72,13 @@ const Content = () => {
 
   return (
     <main className="[&>section]:min-h-screen [&>section]:scroll-mt-28">
-      <section id="about" className="py-24">
+      <section id="about" className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
         <div className="mx-auto w-full max-w-4xl px-6">
-            <AboutMe/>
+          <AboutMe />
         </div>
       </section>
 
-      <section id="skills" >
+      <section id="skills">
         <div className="mx-auto w-full max-w-7xl px-6">
           <div className="mb-10 text-center">
             <p className="text-sm tracking-[0.25em] text-muted-foreground">
@@ -409,57 +93,87 @@ const Content = () => {
           </div>
 
           <div className="mb-10 flex flex-wrap justify-center gap-2">
-            {categories.map(({ name, icon: Icon }) => (
-              <Button
-                key={name}
-                variant={activeCategory === name ? "default" : "outline"}
-                onClick={() => setActiveCategory(name)}
-                className="rounded-full border px-5 py-2 text-sm font-medium transition-all duration-300 active:scale-95"
-              >
-                <Icon className="mr-2 size-4" />
-                {name}
-              </Button>
-            ))}
+            {categories.map(({ name, icon }) => {
+              const Icon = getIcon(icon)
+              return (
+                <Button
+                  key={name}
+                  variant={activeCategory === name ? "default" : "outline"}
+                  onClick={() => setActiveCategory(name)}
+                  className="rounded-full border px-5 py-2 text-sm font-medium transition-all duration-300 active:scale-95"
+                >
+                  <Icon className="mr-2 size-4" />
+                  {name}
+                </Button>
+              )
+            })}
           </div>
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
             <AnimatePresence mode="popLayout">
-              {developmentTools
+              {tools
                 .filter((tool) => tool.role.includes(activeCategory))
-                .map(({ name, value, icon: Icon, description }) => (
-                  <motion.div
-                    key={value}
-                    layout
-                    whileHover={{ y: -5 }}
-                    initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95, y: -5 }}
-                    transition={{
-                      duration: 0.25,
-                      ease: "easeOut",
-                      layout: { type: "spring", stiffness: 350, damping: 30 },
-                    }}
-                    className="group rounded-xl border bg-card p-4 transition-colors duration-300 hover:border-primary/50 hover:bg-muted/50"
-                  >
-                    <div className="mb-4 flex size-10 items-center justify-center rounded-lg bg-muted text-center transition-all duration-300 group-hover:bg-primary/10">
-                      <Icon className="size-5 transition-transform duration-300 group-hover:scale-110 group-hover:text-primary" />
-                    </div>
+                .map(({ name, icon, description }) => {
+                  const Icon = getIcon(icon)
+                  return (
+                    <motion.div
+                      key={name}
+                      layout
+                      whileHover={{ y: -5 }}
+                      initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95, y: -5 }}
+                      transition={{
+                        duration: 0.25,
+                        ease: "easeOut",
+                        layout: { type: "spring", stiffness: 350, damping: 30 },
+                      }}
+                      className="group rounded-xl border bg-card p-4 transition-colors duration-300 hover:border-primary/50 hover:bg-muted/50"
+                    >
+                      <div className="mb-4 flex size-10 items-center justify-center rounded-lg bg-muted text-center transition-all duration-300 group-hover:bg-primary/10">
+                        <Icon className="size-5 transition-transform duration-300 group-hover:scale-110 group-hover:text-primary" />
+                      </div>
 
-                    <h3 className="text-sm font-semibold tracking-tight">
-                      {name}
-                    </h3>
+                      <h3 className="text-sm font-semibold tracking-tight">
+                        {name}
+                      </h3>
 
-                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                      {description}
-                    </p>
-                  </motion.div>
-                ))}
+                      <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                        {description}
+                      </p>
+                    </motion.div>
+                  )
+                })}
             </AnimatePresence>
           </div>
         </div>
       </section>
 
-      <section id="projects" className="py-24">
+      <section className="py-5 sm:py-7 md:py-11 lg:py-16 xl:py-21">
+        <div className="mx-auto w-full px-6">
+          <div className="mb-12 text-center">
+            <p className="text-sm tracking-[0.25em] text-muted-foreground">
+              MY ACHIEVEMENTS
+            </p>
+
+            <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+              Certificates & Certifications
+            </h2>
+
+            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-muted-foreground">
+              A collection of certifications and learning achievements earned
+              through platforms like freeCodeCamp and Cisco, reflecting my
+              commitment to continuous learning and developing my skills in
+              technology.
+            </p>
+          </div>
+          <div>
+            <Marquee certificate={certificate} />
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" className="py-17">
         <div className="mx-auto w-full max-w-5xl px-6">
           <div className="mb-12 text-center">
             <p className="text-sm tracking-[0.25em] text-muted-foreground">
@@ -503,7 +217,9 @@ const Content = () => {
                 {/* Project Information */}
                 <CardHeader className="gap-3">
                   <div>
-                    <CardTitle className="text-xl">{p.title}</CardTitle>
+                    <CardTitle className="text-center text-xl">
+                      {p.title}
+                    </CardTitle>
                     <CardDescription className="mt-2 leading-relaxed">
                       {p.description}
                     </CardDescription>
@@ -511,18 +227,21 @@ const Content = () => {
 
                   {/* Technologies Used */}
                   <div className="flex flex-wrap gap-2">
-                    {p.tools.map(({ titleTools, icon }) => (
-                      <Badge
-                        key={titleTools}
-                        variant="outline"
-                        className="flex items-center gap-1.5"
-                      >
-                        <span className="flex size-3.5 items-center justify-center">
-                          {icon}
-                        </span>
-                        {titleTools}
-                      </Badge>
-                    ))}
+                    {p.tools.map(({ title, icon }) => {
+                      const Icon = getIcon(icon)
+                      return (
+                        <Badge
+                          key={title}
+                          variant="outline"
+                          className="flex items-center gap-1.5"
+                        >
+                          <span className="flex size-3.5 items-center justify-center">
+                            <Icon className="size-full" />
+                          </span>
+                          {title}
+                        </Badge>
+                      )
+                    })}
                   </div>
                 </CardHeader>
 
@@ -553,7 +272,10 @@ const Content = () => {
         </div>
       </section>
 
-      <section id="contact" className="relative min-h-svh scroll-mt-28 py-24">
+      <section
+        id="contact"
+        className="relative min-h-svh scroll-mt-28 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24"
+      >
         <div className="mx-auto w-full max-w-6xl px-6">
           {/* Heading */}
           <motion.div
@@ -607,49 +329,22 @@ const Content = () => {
                 <p className="text-sm font-medium">Connect with me</p>
 
                 <div className="flex flex-wrap gap-3">
-                  <a
-                    href="https://github.com/MrNoOne4"
-                    target="_blank"
-                    rel="noreferrer"
-                    className={socialLinkClass}
-                  >
-                    <FaGithub className="size-4" />
-                    GitHub
-                    <ArrowUpRight className="size-3" />
-                  </a>
-
-                  <a
-                    href="https://www.linkedin.com/in/mathew-de-mesa-1393a7292/"
-                    target="_blank"
-                    rel="noreferrer"
-                    className={socialLinkClass}
-                  >
-                    <FaLinkedin className="size-4" />
-                    LinkedIn
-                    <ArrowUpRight className="size-3" />
-                  </a>
-
-                  <a
-                    href="https://www.facebook.com/markmatt.demesa"
-                    target="_blank"
-                    rel="noreferrer"
-                    className={socialLinkClass}
-                  >
-                    <FaFacebook className="size-4" />
-                    Facebook
-                    <ArrowUpRight className="size-3" />
-                  </a>
-
-                  <a
-                    href="https://www.instagram.com/garouthemonster3/"
-                    target="_blank"
-                    rel="noreferrer"
-                    className={socialLinkClass}
-                  >
-                    <FaInstagram className="size-4" />
-                    Instagram
-                    <ArrowUpRight className="size-3" />
-                  </a>
+                  {socials.map(({ name, href, icon }) => {
+                    const Icon = getIcon(icon)
+                    return (
+                      <a
+                        key={name}
+                        href={href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={socialLinkClass}
+                      >
+                        <Icon className="size-4" />
+                        {name}
+                        <ArrowUpRight className="size-3" />
+                      </a>
+                    )
+                  })}
                 </div>
               </div>
             </motion.div>
@@ -707,12 +402,7 @@ const Content = () => {
             </p>
 
             <nav className="flex flex-wrap gap-x-6 gap-y-3">
-              {[
-                { name: "About", href: "#about", icon: UserRound },
-                { name: "Skills", href: "#skills", icon: GraduationCap },
-                { name: "Projects", href: "#projects", icon: FolderKanban },
-                { name: "Contact", href: "#contact", icon: Mail },
-              ].map(({ name, href, icon: Icon }) => (
+              {navLinks.map(({ name, href, icon: Icon }) => (
                 <a
                   key={name}
                   href={href}
@@ -732,93 +422,81 @@ const Content = () => {
             </p>
 
             <div className="flex items-center justify-center gap-3 sm:justify-start">
-              {[
-                {
-                  name: "GitHub",
-                  href: "https://github.com/MrNoOne4",
-                  icon: FaGithub,
-                },
-                {
-                  name: "LinkedIn",
-                  href: "https://www.linkedin.com/in/mathew-de-mesa-1393a7292/",
-                  icon: FaLinkedin,
-                },
-                {
-                  name: "Instagram",
-                  href: "https://www.instagram.com/garouthemonster3/",
-                  icon: FaInstagram,
-                },
-              ].map(({ name, href, icon: Icon }) => (
-                <a
-                  key={name}
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={name}
-                  className="flex size-9 items-center justify-center rounded-full border text-muted-foreground transition-all hover:-translate-y-1 hover:border-primary/50 hover:bg-muted hover:text-primary"
-                >
-                  <Icon className="size-4" />
-                </a>
-              ))}
+              {footerSocials.map(({ name, href, icon }) => {
+                const Icon = getIcon(icon)
+                return (
+                  <a
+                    key={name}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={name}
+                    className="flex size-9 items-center justify-center rounded-full border text-muted-foreground transition-all hover:-translate-y-1 hover:border-primary/50 hover:bg-muted hover:text-primary"
+                  >
+                    <Icon className="size-4" />
+                  </a>
+                )
+              })}
             </div>
           </div>
         </div>
       </footer>
-
-      {/* Project modal */}
-      {selectedProject && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
-          onClick={closeCarousel}
-        >
+      <AnimatePresence>
+        {/* Project modal */}
+        {selectedProject && (
           <div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="project-dialog-title"
-            className="relative max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-xl border bg-background p-5 shadow-2xl sm:p-7"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/70 p-4 backdrop-blur-sm"
+            onClick={closeCarousel}
           >
-            <button
-              onClick={closeCarousel}
-              aria-label="Close dialog"
-              className="absolute top-4 right-4 z-10 flex size-8 items-center justify-center rounded-full bg-muted text-muted-foreground transition-colors hover:bg-destructive hover:text-white"
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="project-dialog-title"
+              className="relative max-h-[calc(100dvh-2rem)] w-full max-w-4xl overflow-x-hidden overflow-y-auto rounded-xl border bg-background p-5 shadow-2xl sm:p-7"
+              onClick={(e) => e.stopPropagation()}
             >
-              ✕
-            </button>
-
-            <div className="mb-5 pr-8">
-              <h2
-                id="project-dialog-title"
-                className="text-xl font-bold tracking-tight"
+              <button
+                onClick={closeCarousel}
+                aria-label="Close dialog"
+                className="absolute top-4 right-4 z-10 flex size-8 items-center justify-center rounded-full bg-muted text-muted-foreground transition-colors hover:bg-destructive hover:text-white"
               >
-                {selectedProject.title}
-              </h2>
+                ✕
+              </button>
 
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {selectedProject.description}
-              </p>
-            </div>
-
-            <CarouselWithThumbnails
-              images={selectedProject.images}
-              title={selectedProject.title}
-            />
-
-            <div className="mt-6 flex justify-end">
-              <Button asChild>
-                <a
-                  href={selectedProject.linkVercel}
-                  target="_blank"
-                  rel="noopener noreferrer"
+              <div className="mb-5 pr-8">
+                <h2
+                  id="project-dialog-title"
+                  className="text-center text-xl font-bold tracking-tight"
                 >
-                  Visit Live Website
-                  <ArrowUpRight className="ml-2 size-4" />
-                </a>
-              </Button>
+                  {selectedProject.title}
+                </h2>
+
+                <p className="mt-2 text-center text-sm leading-relaxed text-muted-foreground">
+                  {selectedProject.description}
+                </p>
+              </div>
+
+              <CarouselWithThumbnails
+                images={selectedProject.images}
+                title={selectedProject.title}
+              />
+
+              <div className="mt-6 flex justify-end">
+                <Button asChild>
+                  <a
+                    href={selectedProject.linkVercel}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visit Live Website
+                    <ArrowUpRight className="ml-2 size-4" />
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </main>
   )
 }

@@ -20,7 +20,11 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { Send } from "lucide-react";
+import { Send } from "lucide-react"
+import { toast } from "sonner"
+import { useState } from "react"
+import { LoaderIcon } from "lucide-react"
+import { cn } from "cn"
 
 const contactSubjects: ReadonlyArray<{
   label: string
@@ -68,9 +72,10 @@ const contactSubjects: ReadonlyArray<{
   },
 ]
 const formSchema = z.object({
+    name: z.string().min(2, "Name must be at least 2 characters."),
+
   email: z.email("Please enter a valid email address."),
   message: z.string().min(10, "Message must be at least 10 characters."),
-  name: z.string().min(2, "Name must be at least 2 characters."),
   subject: z.string().min(1, "Please select a subject."),
 })
 
@@ -82,19 +87,76 @@ const subjects = [
   { label: "Other", value: "other" },
 ]
 
+function Spinner({ className, ...props }: React.ComponentProps<"svg">) {
+  return (
+    <LoaderIcon
+      role="status"
+      aria-label="Loading"
+      className={cn("size-4 animate-spin", className)}
+      {...props}
+    />
+  )
+}
+
 const ContactForm = () => {
+  const [loading, setLoading] = useState<boolean>(false)
+
   const form = useForm({
     defaultValues: {
+      name: "",
       email: "",
       message: "",
-      name: "",
       subject: "",
     },
     resolver: zodResolver(formSchema),
   })
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values)
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setLoading(true)
+
+    try {
+      const request = await fetch("/api/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          message: values.message,
+          inquiryType: values.subject,
+        }),
+      })
+
+      const response = await request.json()
+
+      if (!request.ok || !response.success) {
+        toast.error(
+          response.message || "Failed to send your message. Please try again.",
+          {
+            position: "bottom-center",
+          }
+        )
+        return
+      }
+
+      toast.success(response.message || "Message sent successfully!", {
+        position: "bottom-center",
+      })
+
+      form.reset()
+    } catch (error) {
+      console.error("Contact form error:", error)
+
+      toast.error(
+        "Unable to connect to the server. Please check your internet connection and try again.",
+        {
+          position: "bottom-center",
+        }
+      )
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -106,6 +168,26 @@ const ContactForm = () => {
             We&apos;ll get back to you within 24 hours
           </p>
         </div>
+
+        <Controller
+          control={form.control}
+          name="name"
+          render={({ field, fieldState }) => (
+            <Field invalid={fieldState.invalid}>
+              <FieldLabel htmlFor="contact-form-name">Full Name</FieldLabel>
+
+              <Input
+                {...field}
+                id="contact-form-name"
+                placeholder=""
+                type="text"
+              />
+
+              <FieldError>{fieldState.error?.message}</FieldError>
+            </Field>
+          )}
+        />
+
         <Controller
           control={form.control}
           name="subject"
@@ -195,6 +277,7 @@ const ContactForm = () => {
                 id="contact-form-message"
                 placeholder="How can we help you?"
                 rows={5}
+                cols={30}
               />
               <FieldDescription>
                 Please provide as much detail as possible.
@@ -204,8 +287,16 @@ const ContactForm = () => {
           )}
         />
         <Field>
-          <Button className="w-full" type="submit">
-            <Send/>Send Message
+          <Button className="w-full" type="submit" disabled={loading}>
+            {!loading && <Send />}
+            {loading ? (
+              <span className="flex items-center gap-2">
+                <Spinner />
+                Sending...
+              </span>
+            ) : (
+              "Send Message"
+            )}
           </Button>
         </Field>
       </FieldGroup>

@@ -11,19 +11,19 @@ import "swiper/css/free-mode"
 import "swiper/css/navigation"
 import "swiper/css/thumbs"
 
-interface props{
-    images: string[],
-    title: string
+interface props {
+  images: string[]
+  title: string
 }
 
-export function CarouselWithThumbnails({ images, title } : props) {
+export function CarouselWithThumbnails({ images, title }: props) {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null)
 
-//   const images = [
-//     "https://raw.githubusercontent.com/creativetimofficial/public-assets/refs/heads/master/creative-ai/bg-3.jpg",
-//     "https://raw.githubusercontent.com/creativetimofficial/public-assets/refs/heads/master/creative-ai/bg-2.jpg",
-//     "https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&w=2000&q=85",
-//   ]
+  //   const images = [
+  //     "https://raw.githubusercontent.com/creativetimofficial/public-assets/refs/heads/master/creative-ai/bg-3.jpg",
+  //     "https://raw.githubusercontent.com/creativetimofficial/public-assets/refs/heads/master/creative-ai/bg-2.jpg",
+  //     "https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&w=2000&q=85",
+  //   ]
 
   return (
     <>

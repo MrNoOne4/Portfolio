@@ -1,0 +1,292 @@
+{
+  "categories": [
+    { "name": "All", "icon": "LayoutGrid" },
+    { "name": "Languages", "icon": "Languages" },
+    { "name": "Frontend", "icon": "Monitor" },
+    { "name": "Backend", "icon": "Server" },
+    { "name": "Database", "icon": "Database" },
+    { "name": "Tools", "icon": "Wrench" }
+  ],
+
+  "tools": [
+    {
+      "name": "HTML",
+      "icon": "SiHtml5",
+      "description": "Structures web pages with semantic markup.",
+      "role": ["All", "Frontend"]
+    },
+    {
+      "name": "CSS",
+      "icon": "SiCss",
+      "description": "Styles and designs responsive web interfaces.",
+      "role": ["All", "Frontend"]
+    },
+    {
+      "name": "Java",
+      "icon": "Code",
+      "description": "A versatile, object-oriented programming language used to build web, mobile, and enterprise applications.",
+      "role": ["All", "Backend", "Languages"]
+    },
+    {
+      "name": "JavaScript",
+      "icon": "SiJavascript",
+      "description": "Adds interactivity and dynamic behavior to websites.",
+      "role": ["All", "Frontend", "Languages"]
+    },
+    {
+      "name": "TypeScript",
+      "icon": "SiTypescript",
+      "description": "Adds static typing to JavaScript applications.",
+      "role": ["All", "Frontend", "Languages"]
+    },
+
+    {
+      "name": "React",
+      "icon": "SiReact",
+      "description": "Builds interactive user interfaces with reusable components.",
+      "role": ["All", "Frontend"]
+    },
+    {
+      "name": "Auth.js",
+      "icon": "SiAuth0",
+      "description": "Handles authentication, sessions, and secure user sign-ins.",
+      "role": ["All", "Backend"]
+    },
+    {
+      "name": "Next.js",
+      "icon": "SiNextdotjs",
+      "description": "Develops full-stack React applications and websites.",
+      "role": ["All", "Frontend"]
+    },
+    {
+      "name": "Vite",
+      "icon": "SiVite",
+      "description": "Provides a fast frontend development environment.",
+      "role": ["All", "Frontend", "Tools"]
+    },
+    {
+      "name": "Tailwind CSS",
+      "icon": "SiTailwindcss",
+      "description": "Creates modern interfaces using utility-first CSS.",
+      "role": ["All", "Frontend"]
+    },
+    {
+      "name": "shadcn/ui",
+      "icon": "SiShadcnui",
+      "description": "Provides customizable and accessible UI components.",
+      "role": ["All", "Frontend"]
+    },
+    {
+      "name": "Framer Motion",
+      "icon": "SiFramer",
+      "description": "Creates smooth animations and interactive transitions.",
+      "role": ["All", "Frontend"]
+    },
+
+    {
+      "name": "MySQL",
+      "icon": "SiMysql",
+      "description": "Manages relational data using SQL.",
+      "role": ["All", "Database", "Backend"]
+    },
+    {
+      "name": "Aiven",
+      "icon": "Database",
+      "description": "Provides managed cloud database infrastructure.",
+      "role": ["All", "Database", "Backend"]
+    },
+    {
+      "name": "OOP",
+      "icon": "Boxes",
+      "description": "Organizes code using objects, classes, and reusable principles.",
+      "role": ["All", "Languages"]
+    },
+    {
+      "name": "Prisma",
+      "icon": "SiPrisma",
+      "description": "Simplifies database access with a type-safe ORM.",
+      "role": ["All", "Backend", "Database"]
+    },
+
+    {
+      "name": "Git",
+      "icon": "GitBranch",
+      "description": "Tracks changes and manages source code versions.",
+      "role": ["All", "Tools"]
+    },
+    {
+      "name": "GitHub",
+      "icon": "GitBranch",
+      "description": "Hosts repositories and supports collaborative development.",
+      "role": ["All", "Tools"]
+    },
+    {
+      "name": "MySQL Workbench",
+      "icon": "Database",
+      "description": "Designs, manages, and visualizes MySQL databases.",
+      "role": ["All", "Tools", "Database"]
+    },
+    {
+      "name": "VS Code",
+      "icon": "Code2",
+      "description": "A lightweight editor for writing and managing code.",
+      "role": ["All", "Tools"]
+    },
+    {
+      "name": "Figma",
+      "icon": "SiFigma",
+      "description": "Designs user interfaces and interactive prototypes.",
+      "role": ["All", "Tools"]
+    },
+
+    {
+      "name": "Claude AI",
+      "icon": "SiClaude",
+      "description": "Assists with coding, problem-solving, and development.",
+      "role": ["All", "Tools"]
+    },
+    {
+      "name": "Gemini AI",
+      "icon": "Sparkles",
+      "description": "Supports research, coding, and creative workflows.",
+      "role": ["All", "Tools"]
+    },
+
+    {
+      "name": "Vercel",
+      "icon": "Triangle",
+      "description": "Deploys and hosts modern web applications.",
+      "role": ["All", "Tools"]
+    },
+    {
+      "name": "Netlify",
+      "icon": "SiNetlify",
+      "description": "Builds, deploys, and hosts web projects.",
+      "role": ["All", "Tools"]
+    }
+  ],
+
+  "techStack": [
+    { "title": "Next.js", "icon": "SiNextdotjs" },
+    { "title": "TypeScript", "icon": "SiTypescript" },
+    { "title": "JavaScript", "icon": "SiJavascript" },
+    { "title": "React", "icon": "SiReact" },
+    { "title": "Tailwind CSS", "icon": "SiTailwindcss" },
+    { "title": "Node.js", "icon": "SiNodedotjs" },
+    { "title": "Auth.js", "icon": "SiAuth0" },
+    { "title": "MySQL", "icon": "SiMysql" },
+    { "title": "Vercel", "icon": "SiVercel" },
+    { "title": "Aiven", "icon": "Database" }
+  ],
+
+  "projects": [
+    {
+      "title": "Hotel reservation and management system",
+      "thumbnail": "/images/hotelThumbnail.png",
+      "description": "The Hotel Reservation and Room Management System allows customers to book rooms and process payments while helping hotel staff manage rooms, guests, reservations, check-ins, check-outs, and billing efficiently.",
+      "tools": [
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "React",
+        "Tailwind CSS",
+        "Node.js",
+        "Auth.js",
+        "MySQL",
+        "Vercel",
+        "Aiven"
+      ],
+      "linkVercel": "https://hotel-reservation-n21f.vercel.app/userPage",
+      "linkGithub": "https://github.com/MrNoOne4/HotelReservation",
+      "images": [
+        "/images/hotelThumbnail.png",
+        "/images/Hotel2.png",
+        "/images/Hotel3.png",
+        "/images/Hotel4.png",
+        "/images/Hotel5.png",
+        "/images/Hotel6.png",
+        "/images/Hotel7.png",
+        "/images/Hotel8.png",
+        "/images/Hotel9.png",
+        "/images/Hotel10.png",
+        "/images/Hotel11.png",
+        "/images/Hotel12.png",
+        "/images/Hotel13.png",
+        "/images/Hotel14.png",
+        "/images/Hotel15.png"
+      ]
+    },
+    {
+      "title": "Coffee & Snacks Ordering and Management Dashboard",
+      "thumbnail": "/images/brewCoffeeThumbnail.png",
+      "description": "A user-friendly dashboard that helps administrators manage coffee and snack menus, customer orders, products, pricing, and sales efficiently, ensuring smooth daily business operations.",
+      "tools": [
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "React",
+        "Tailwind CSS",
+        "Node.js",
+        "Auth.js",
+        "MySQL",
+        "Vercel",
+        "Aiven"
+      ],
+      "linkVercel": "https://brewcoffee.vercel.app/",
+      "linkGithub": "https://github.com/MrNoOne4/brewCoffee",
+      "images": [
+        "/images/Brew1.png",
+        "/images/Brew2.png",
+        "/images/Brew3.png",
+        "/images/Brew4.png",
+        "/images/Brew5.png",
+        "/images/Brew6.png",
+        "/images/Brew7.png",
+        "/images/Brew8.png",
+        "/images/Brew10.png",
+        "/images/Brew11.png",
+        "/images/Brew12.png",
+        "/images/Brew13.png",
+        "/images/Brew14.png",
+        "/images/Brew15.png"
+      ]
+    }
+  ],
+
+  "socials": [
+    {
+      "name": "GitHub",
+      "href": "https://github.com/MrNoOne4",
+      "icon": "FaGithub",
+      "inFooter": true
+    },
+    {
+      "name": "LinkedIn",
+      "href": "https://www.linkedin.com/in/mathew-de-mesa-1393a7292/",
+      "icon": "FaLinkedin",
+      "inFooter": true
+    },
+    {
+      "name": "Facebook",
+      "href": "https://www.facebook.com/markmatt.demesa",
+      "icon": "FaFacebook",
+      "inFooter": false
+    },
+    {
+      "name": "Instagram",
+      "href": "https://www.instagram.com/garouthemonster3/",
+      "icon": "FaInstagram",
+      "inFooter": true
+    }
+  ],
+
+  "Certificate": [
+    { "name": "Certificate 1", "image": "/images/Certificate1.png" },
+    { "name": "Certificate 2", "image": "/images/Certificate2.png" },
+    { "name": "Certificate 3", "image": "/images/Certificate3.png" },
+    { "name": "Certificate 4", "image": "/images/Certificate4.png" },
+    { "name": "Certificate 5", "image": "/images/Certificate5.png" },
+    { "name": "Certificate 6", "image": "/images/Certificate6.png" },
+    { "name": "Certificate 7", "image": "/images/Certificate7.png" }
+  ]
+}

@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/tooltip"
 import { Sun, Moon, SunMoon } from "lucide-react"
 import { useState, useEffect } from "react"
+import { getIcon } from "@/lib/icons"
 
 const navLinks = [
   { name: "About", href: "#about" },
@@ -96,6 +97,10 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (typeof event.key !== "string" || event.key.toLowerCase() !== "d") {
+        return
+      }
+
       if (event.key.toLowerCase() === "d") {
         const theme = localStorage.getItem("theme")
         setTheme(theme as "light" | "dark" | "")
@@ -127,17 +132,12 @@ export default function Navbar() {
             : "border border-transparent py-3"
         }`}
       >
-        <Link
-          href="#home"
+        <span
           className="group flex items-center gap-3"
           aria-label="Go to homepage"
         >
-          <div className="metallic-logo flex h-10 w-10 items-center justify-center rounded-xl">
-            <span className="text-lg font-bold">A.</span>
-          </div>
-
-          <div className="hidden sm:block">
-            <p className="font-bold tracking-wider">
+          <div>
+            <p className="text-center font-bold tracking-wider">
               Mathew<span className="text-zinc-400">.</span>
             </p>
 
@@ -145,11 +145,11 @@ export default function Navbar() {
               DEVELOPER PORTFOLIO
             </p>
           </div>
-        </Link>
+        </span>
 
         <div
           className={`hidden items-center transition-all duration-300 ease-in-out ${
-            !isScrolled ? "gap-5" : "gap-8"
+            !isScrolled ? "gap-5 " : "gap-8"
           } lg:flex`}
         >
           {navLinks.map((link) => {
@@ -184,10 +184,7 @@ export default function Navbar() {
                   )}
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>
-                    Press &quot;d&quot; to toggle {theme}{" "}
-                    mode
-                  </p>{" "}
+                  <p>Press &quot;d&quot; to toggle {theme} mode</p>{" "}
                 </TooltipContent>
               </Tooltip>
               <AlertDialogTrigger asChild>
@@ -257,9 +254,9 @@ export default function Navbar() {
             side="right"
             className="metallic-mobile-panel w-[300px] border-l border-border"
           >
-            <SheetTitle className="text-lg font-bold tracking-wider text-foreground">
+            {/* <SheetTitle className="text-lg font-bold tracking-wider text-foreground">
               NAVIGATION
-            </SheetTitle>
+            </SheetTitle> */}
 
             <div className="mt-10 flex flex-col gap-2">
               {navLinks.map((link) => {
@@ -283,7 +280,7 @@ export default function Navbar() {
             </div>
 
             <div className="mt-8">
-              <Button asChild className="metallic-button w-full rounded-xl">
+              <Button asChild className="metallic-button w-full rounded-xl px-4">
                 <a href="/resume.pdf" download>
                   <Download className="mr-2 h-4 w-4" />
                   Download CV
