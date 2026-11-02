@@ -70,16 +70,51 @@ const Content = () => {
     }
   }, [selectedProject])
 
+  const reveal = {
+    hidden: {
+      opacity: 0,
+      y: 40,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+    },
+  }
+
+  const revealTransition = {
+    duration: 0.7,
+    ease: "easeOut" as const,
+  }
+
+  const revealViewport = {
+    once: true,
+    amount: 0.15,
+  }
+
   return (
     <main className="[&>section]:min-h-screen [&>section]:scroll-mt-28">
       <section id="about" className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
-        <div className="mx-auto w-full max-w-4xl px-6">
+        <motion.div
+          variants={reveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={revealViewport}
+          transition={revealTransition}
+          className="mx-auto w-full max-w-4xl px-6"
+        >
           <AboutMe />
-        </div>
+        </motion.div>
       </section>
 
       <section id="skills">
-        <div className="mx-auto w-full max-w-7xl px-6">
+        <motion.div
+          variants={reveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={revealViewport}
+          transition={revealTransition}
+          className="mx-auto w-full max-w-7xl px-6"
+        >
           <div className="mb-10 text-center">
             <p className="text-sm tracking-[0.25em] text-muted-foreground">
               MY TECH STACK
@@ -118,6 +153,8 @@ const Content = () => {
                   return (
                     <motion.div
                       key={name}
+                      variants={reveal}
+                      whileInView="visible"
                       layout
                       whileHover={{ y: -5 }}
                       initial={{ opacity: 0, scale: 0.95, y: 10 }}
@@ -146,11 +183,18 @@ const Content = () => {
                 })}
             </AnimatePresence>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section className="py-5 sm:py-7 md:py-11 lg:py-16 xl:py-21">
-        <div className="mx-auto w-full px-6">
+        <motion.div
+          variants={reveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={revealViewport}
+          transition={revealTransition}
+          className="mx-auto w-full px-6"
+        >
           <div className="mb-12 text-center">
             <p className="text-sm tracking-[0.25em] text-muted-foreground">
               MY ACHIEVEMENTS
@@ -170,11 +214,18 @@ const Content = () => {
           <div>
             <Marquee certificate={certificate} />
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section id="projects" className="py-17">
-        <div className="mx-auto w-full max-w-5xl px-6">
+        <motion.div
+          variants={reveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={revealViewport}
+          transition={revealTransition}
+          className="mx-auto w-full max-w-5xl px-6"
+        >
           <div className="mb-12 text-center">
             <p className="text-sm tracking-[0.25em] text-muted-foreground">
               MY WORK
@@ -191,92 +242,111 @@ const Content = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            {projects.map((p) => (
-              <Card
+            {projects.map((p, index: number) => (
+              <motion.div
                 key={p.title}
-                className="group overflow-hidden border-border bg-card pt-0 transition-all duration-300 hover:-translate-y-2 hover:border-foreground/30 hover:shadow-xl"
+                variants={reveal}
+                initial="hidden"
+                whileInView="visible"
+                viewport={revealViewport}
+                transition={{
+                  ...revealTransition,
+                  delay: (index % 2) * 0.15,
+                }}
               >
-                {/* Project Thumbnail */}
-                <div className="relative overflow-hidden">
-                  <img
-                    src={p.thumbnail}
-                    alt={p.title}
-                    className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+                <Card
+                  key={p.title}
+                  className="group overflow-hidden border-border bg-card pt-0 transition-all duration-300 hover:-translate-y-2 hover:border-foreground/30 hover:shadow-xl"
+                >
+                  {/* Project Thumbnail */}
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={p.thumbnail}
+                      alt={p.title}
+                      className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
 
-                  <div className="absolute inset-0 bg-black/10 transition-colors duration-300 group-hover:bg-black/0" />
+                    <div className="absolute inset-0 bg-black/10 transition-colors duration-300 group-hover:bg-black/0" />
 
-                  <Badge
-                    variant="secondary"
-                    className="absolute top-4 left-4 backdrop-blur-md"
-                  >
-                    Web Development
-                  </Badge>
-                </div>
-
-                {/* Project Information */}
-                <CardHeader className="gap-3">
-                  <div>
-                    <CardTitle className="text-center text-xl">
-                      {p.title}
-                    </CardTitle>
-                    <CardDescription className="mt-2 leading-relaxed">
-                      {p.description}
-                    </CardDescription>
-                  </div>
-
-                  {/* Technologies Used */}
-                  <div className="flex flex-wrap gap-2">
-                    {p.tools.map(({ title, icon }) => {
-                      const Icon = getIcon(icon)
-                      return (
-                        <Badge
-                          key={title}
-                          variant="outline"
-                          className="flex items-center gap-1.5"
-                        >
-                          <span className="flex size-3.5 items-center justify-center">
-                            <Icon className="size-full" />
-                          </span>
-                          {title}
-                        </Badge>
-                      )
-                    })}
-                  </div>
-                </CardHeader>
-
-                {/* Project Links */}
-                <CardFooter className="flex gap-3">
-                  <Button
-                    className="flex-1"
-                    onClick={() => setSelectedProject(p)}
-                  >
-                    Live Demo
-                    <ArrowUpRight className="ml-2 size-4" />
-                  </Button>
-
-                  <Button variant="outline" className="flex-1" asChild>
-                    <a
-                      href={p.linkGithub}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Badge
+                      variant="secondary"
+                      className="absolute top-4 left-4 backdrop-blur-md"
                     >
-                      <FaGithub className="mr-2 size-4" />
-                      Source Code
-                    </a>
-                  </Button>
-                </CardFooter>
-              </Card>
+                      Web Development
+                    </Badge>
+                  </div>
+
+                  {/* Project Information */}
+                  <CardHeader className="gap-3">
+                    <div>
+                      <CardTitle className="text-center text-xl">
+                        {p.title}
+                      </CardTitle>
+                      <CardDescription className="mt-2 leading-relaxed">
+                        {p.description}
+                      </CardDescription>
+                    </div>
+
+                    {/* Technologies Used */}
+                    <div className="flex flex-wrap gap-2">
+                      {p.tools.map(({ title, icon }) => {
+                        const Icon = getIcon(icon)
+                        return (
+                          <Badge
+                            key={title}
+                            variant="outline"
+                            className="flex items-center gap-1.5"
+                          >
+                            <span className="flex size-3.5 items-center justify-center">
+                              <Icon className="size-full" />
+                            </span>
+                            {title}
+                          </Badge>
+                        )
+                      })}
+                    </div>
+                  </CardHeader>
+
+                  {/* Project Links */}
+                  <CardFooter className="flex gap-3">
+                    <Button
+                      className="flex-1"
+                      onClick={() => setSelectedProject(p)}
+                    >
+                      Live Demo
+                      <ArrowUpRight className="ml-2 size-4" />
+                    </Button>
+
+                    <Button variant="outline" className="flex-1" asChild>
+                      <a
+                        href={p.linkGithub}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FaGithub className="mr-2 size-4" />
+                        Source Code
+                      </a>
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section
         id="contact"
         className="relative min-h-svh scroll-mt-28 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24"
       >
-        <div className="mx-auto w-full max-w-6xl px-6">
+        <motion.div
+          variants={reveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={revealViewport}
+          transition={revealTransition}
+          className="mx-auto w-full max-w-6xl px-6"
+        >
           {/* Heading */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -367,7 +437,7 @@ const Content = () => {
               <ContactForm />
             </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <footer className="border-t">

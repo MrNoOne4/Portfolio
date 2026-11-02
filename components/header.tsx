@@ -27,6 +27,7 @@ import {
 import { Sun, Moon, SunMoon } from "lucide-react"
 import { useState, useEffect } from "react"
 import { getIcon } from "@/lib/icons"
+import { UserRound, Brain, FolderKanban, Mail } from "lucide-react"
 
 const navLinks = [
   { name: "About", href: "#about" },
@@ -114,6 +115,30 @@ export default function Navbar() {
     }
   }, [])
 
+  const [now, setNow] = useState(new Date())
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setNow(new Date())
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [])
+
+  const currentDate = now.toLocaleDateString("en-PH", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  })
+
+  const currentTime = now.toLocaleTimeString("en-PH", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  })
+
   return (
     <header
       className={`sticky top-0 z-50 w-full px-4 transition-all duration-300 ease-in-out sm:px-6 ${
@@ -149,7 +174,7 @@ export default function Navbar() {
 
         <div
           className={`hidden items-center transition-all duration-300 ease-in-out ${
-            !isScrolled ? "gap-5 " : "gap-8"
+            !isScrolled ? "gap-5" : "gap-8"
           } lg:flex`}
         >
           {navLinks.map((link) => {
@@ -252,13 +277,55 @@ export default function Navbar() {
 
           <SheetContent
             side="right"
-            className="metallic-mobile-panel w-[300px] border-l border-border"
+            className="metallic-mobile-panel max-h-screen w-[300px] overflow-y-auto border-l border-border"
           >
-            {/* <SheetTitle className="text-lg font-bold tracking-wider text-foreground">
-              NAVIGATION
-            </SheetTitle> */}
+            {/* HEADER */}
+            <div className="px-5 pt-12 pb-5">
+              {/* <div className="flex items-center justify-between">
+                <span className="text-[10px] font-semibold tracking-[0.25em] text-muted-foreground">
+                  PERSONAL PORTFOLIO
+                </span>
 
-            <div className="mt-10 flex flex-col gap-2">
+                <span className="flex items-center gap-2 text-[10px] tracking-wider text-emerald-500">
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
+                  AVAILABLE
+                </span>
+              </div> */}
+
+              <SheetTitle className="mt-2 text-center text-3xl font-black tracking-[0.15em] text-foreground">
+                EXPLORE<span className="text-muted-foreground">.</span>
+              </SheetTitle>
+              {/* LIVE CLOCK */}
+              <div className="mt-6 rounded-xl border border-border bg-background/50 p-4">
+                <p className="text-[9px] tracking-[0.25em] text-muted-foreground">
+                  LOCAL TIME
+                </p>
+
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {currentDate}
+                </p>
+
+                <p className="mt-2 text-2xl font-bold tracking-wider tabular-nums">
+                  {currentTime}
+                </p>
+
+                <div className="mt-3 flex items-center justify-between">
+                  <span className="text-[10px] text-muted-foreground">
+                    Philippines Standard Time
+                  </span>
+                  <span className="text-[10px] font-medium text-emerald-500">
+                    UTC +8
+                  </span>
+                </div>
+              </div>
+
+              <p className="mt-5 text-[10px] tracking-[0.2em] text-muted-foreground">
+                DISCOVER WHAT I BUILD
+              </p>
+            </div>
+
+            {/* NAVIGATION */}
+            <div className="mt-3 flex flex-col gap-2 px-4">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.href.slice(1)
 
@@ -271,7 +338,19 @@ export default function Navbar() {
                         isActive ? "mobile-nav-active" : ""
                       }`}
                     >
-                      {link.name}
+                      <span className="flex items-center gap-2">
+                        {link.name === "About" ? (
+                          <UserRound />
+                        ) : link.name === "Skills" ? (
+                          <Brain />
+                        ) : link.name === "Projects" ? (
+                          <FolderKanban />
+                        ) : (
+                          <Mail />
+                        )}
+                        {link.name}
+                      </span>
+
                       <ArrowUpRight className="h-4 w-4" />
                     </Link>
                   </SheetClose>
@@ -279,8 +358,12 @@ export default function Navbar() {
               })}
             </div>
 
-            <div className="mt-8">
-              <Button asChild className="metallic-button w-full rounded-xl px-4">
+            {/* DOWNLOAD CV */}
+            <div className="mt-8 px-4">
+              <Button
+                asChild
+                className="metallic-button w-full rounded-xl px-4"
+              >
                 <a href="/resume.pdf" download>
                   <Download className="mr-2 h-4 w-4" />
                   Download CV
@@ -288,8 +371,15 @@ export default function Navbar() {
               </Button>
             </div>
 
-            <div className="absolute bottom-8 left-6 text-xs tracking-widest text-muted-foreground">
-              © {new Date().getFullYear()} MATHEW
+            {/* FOOTER */}
+            <div className="absolute right-6 bottom-8 left-6 flex items-center justify-between border-t border-border pt-4">
+              <span className="text-[10px] tracking-widest text-muted-foreground">
+                © {now.getFullYear()} MATHEW
+              </span>
+
+              <span className="text-[10px] tracking-widest text-muted-foreground">
+                BUILT WITH PASSION.
+              </span>
             </div>
           </SheetContent>
         </Sheet>
