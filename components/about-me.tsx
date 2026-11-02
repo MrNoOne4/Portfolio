@@ -42,7 +42,7 @@ export default function AboutMeSection() {
             </div>
 
             {/* Quick Stats */}
-            <div className="w-full max-w-sm space-y-4 rounded-xl border bg-muted/30 p-6">
+            <div className="w-full max-w-sm space-y-6 rounded-xl border bg-muted/30 p-6">
               <h3 className="text-lg font-semibold">Quick Facts</h3>
 
               <div className="grid gap-3">
@@ -59,7 +59,7 @@ export default function AboutMeSection() {
                   <div>
                     <p className="text-sm text-muted-foreground">University</p>
                     <p className="font-medium">
-                      Pamantasan ng Lungsod ng Cabuyao
+                      Pamantasan ng Cabuyao
                     </p>
                   </div>
                 </div>
@@ -153,7 +153,7 @@ export default function AboutMeSection() {
 
             <div className="space-y-4 text-lg text-muted-foreground">
               <p>
-                I am a third-year college student at Pamantasan ng Lungsod ng
+                I am a third-year college student at Pamantasan ng
                 Cabuyao with a passion for web development and technology. I
                 enjoy building modern, responsive, and user-friendly
                 applications while continuously improving my programming and
