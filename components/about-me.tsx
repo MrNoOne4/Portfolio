@@ -154,18 +154,18 @@ export default function AboutMeSection() {
             <div className="space-y-4 text-lg text-muted-foreground">
               <p>
                 I am a third-year college student at Pamantasan ng Lungsod ng
-                Laguna with a passion for web development and technology. I
+                Cabuyao with a passion for web development and technology. I
                 enjoy building modern, responsive, and user-friendly
                 applications while continuously improving my programming and
                 problem-solving skills.
               </p>
 
               <p>
-                My interests include frontend and backend development, database
+                My interests include Full Stack Development, database
                 management, and creating functional systems that solve
                 real-world problems. I have experience working with technologies
                 such as React, Next.js, TypeScript, JavaScript, Tailwind CSS,
-                Node.js, and MySQL through academic and personal projects.
+                 and MySQL through academic and personal projects.
               </p>
 
               <p>
