@@ -1,7 +1,7 @@
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Calendar, MapPin, Mail, ExternalLink, ArrowRight } from "lucide-react"
+import { Calendar, MapPin, Mail, GraduationCap, ExternalLink, ArrowRight } from "lucide-react"
 import { SiGithub } from "@icons-pack/react-simple-icons"
 import { Linkedin, Twitter } from "@/components/ui/brand-icons"
 import { motion } from "framer-motion"
@@ -59,10 +59,20 @@ export default function AboutMeSection() {
                   <div>
                     <p className="text-sm text-muted-foreground">University</p>
                     <p className="font-medium">
-                      Pamantasan ng Lungsod ng Laguna
+                      Pamantasan ng Lungsod ng Cabuyao
                     </p>
                   </div>
                 </div>
+
+              <div className="flex items-center gap-3">
+                <GraduationCap className="h-5 w-5 text-muted-foreground" />
+                <div>
+                  <p className="text-sm text-muted-foreground">Program</p>
+                  <p className="font-medium">
+                    Bachelor of Science in Information Technology (BSIT)
+                  </p>
+                </div>
+              </div>
 
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5 text-muted-foreground" />
