@@ -6,6 +6,7 @@ import {
   Mail,
   ArrowUpRight,
   ArrowUp,
+  Copyright,
   Sparkles,
 } from "lucide-react"
 import { FaGithub } from "react-icons/fa"
@@ -488,7 +489,7 @@ const Content = () => {
           {/* Bottom Section */}
           <div className="flex flex-col-reverse gap-5 text-center sm:flex-row sm:items-center sm:justify-between">
             <p className="text-center text-xs text-muted-foreground">
-              © {new Date().getFullYear()} Mathew Demesa. All rights reserved.
+              <Copyright/> {new Date().getFullYear()} Mathew Demesa. All rights reserved.
             </p>
 
             <div className="flex items-center justify-center gap-3 sm:justify-start">

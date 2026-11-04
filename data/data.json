@@ -172,7 +172,6 @@
     { "title": "JavaScript", "icon": "SiJavascript" },
     { "title": "React", "icon": "SiReact" },
     { "title": "Tailwind CSS", "icon": "SiTailwindcss" },
-    { "title": "Node.js", "icon": "SiNodedotjs" },
     { "title": "Auth.js", "icon": "SiAuth0" },
     { "title": "MySQL", "icon": "SiMysql" },
     { "title": "Vercel", "icon": "SiVercel" },
@@ -181,7 +180,7 @@
 
   "projects": [
     {
-      "title": "Hotel reservation and management system",
+      "title": "Hotel reservation and Room management system",
       "thumbnail": "/images/hotelThumbnail.png",
       "description": "The Hotel Reservation and Room Management System allows customers to book rooms and process payments while helping hotel staff manage rooms, guests, reservations, check-ins, check-outs, and billing efficiently.",
       "tools": [
@@ -190,7 +189,6 @@
         "JavaScript",
         "React",
         "Tailwind CSS",
-        "Node.js",
         "Auth.js",
         "MySQL",
         "Vercel",
@@ -226,7 +224,6 @@
         "JavaScript",
         "React",
         "Tailwind CSS",
-        "Node.js",
         "Auth.js",
         "MySQL",
         "Vercel",
@@ -248,7 +245,9 @@
         "/images/Brew12.png",
         "/images/Brew13.png",
         "/images/Brew14.png",
-        "/images/Brew15.png"
+        "/images/Brew15.png",
+        "/images/Brew17.png",
+        "/images/Brew18.png"
       ]
     }
   ],

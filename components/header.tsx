@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Menu, Download, ArrowUpRight, Eye, X } from "lucide-react"
+import { Menu, Download, ArrowUpRight, Eye, X, Copyright } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -373,8 +373,8 @@ export default function Navbar() {
 
             {/* FOOTER */}
             <div className="absolute right-6 bottom-8 left-6 flex items-center justify-between border-t border-border pt-4">
-              <span className="text-[10px] tracking-widest text-muted-foreground">
-                © {now.getFullYear()} MATHEW
+              <span className="text-[10px] tracking-widest text-muted-foreground flex gap-2 items-center">
+                <Copyright/> {now.getFullYear()} MATHEW
               </span>
 
               <span className="text-[10px] tracking-widest text-muted-foreground">
