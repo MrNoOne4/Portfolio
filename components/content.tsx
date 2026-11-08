@@ -488,7 +488,7 @@ const Content = () => {
 
           {/* Bottom Section */}
           <div className="flex flex-col-reverse gap-5 text-center sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-center text-xs text-muted-foreground">
+            <p className="text-center text-xs text-muted-foreground flex gap-1">
               <Copyright/> {new Date().getFullYear()} Mathew Demesa. All rights reserved.
             </p>
 

@@ -22,6 +22,7 @@ import {
   Boxes,
   Globe,
   ShieldCheck,
+  Network,
 } from "lucide-react"
 import { FaFacebook, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa"
 import {
@@ -41,6 +42,7 @@ import {
   SiFigma,
   SiNetlify,
   SiClaude,
+  SiPostman,
   SiCss,
 } from "react-icons/si"
 import { SiHtml5 } from "@icons-pack/react-simple-icons"
@@ -60,6 +62,7 @@ export const iconMap = {
   // lucide-react
   LayoutGrid,
   Languages,
+  Network,
   Monitor,
   Server,
   Database,
@@ -87,6 +90,7 @@ export const iconMap = {
   FaGithub,
   // react-icons/si
   SiNextdotjs,
+  SiPostman,
   SiPrisma,
   SiTailwindcss,
   SiAuth0,
@@ -95,7 +99,7 @@ export const iconMap = {
   SiTypescript,
   SiJavascript,
   SiHtml5,
-  
+
   SiNodedotjs,
 } satisfies Record<string, IconComponent>
 

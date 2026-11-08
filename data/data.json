@@ -53,6 +53,12 @@
       "role": ["All", "Backend"]
     },
     {
+      "name": "RESTful API",
+      "icon": "Network",
+      "description": "Enables communication between frontend and backend applications through HTTP methods and REST principles.",
+      "role": ["All", "Backend"]
+    },
+    {
       "name": "Next.js",
       "icon": "SiNextdotjs",
       "description": "Develops full-stack React applications and websites.",
@@ -63,6 +69,13 @@
       "icon": "SiVite",
       "description": "Provides a fast frontend development environment.",
       "role": ["All", "Frontend", "Tools"]
+    },
+
+    {
+      "name": "Postman",
+      "icon": "SiPostman",
+      "description": "Tests, debugs, and documents APIs by sending HTTP requests and inspecting responses.",
+      "role": ["All", "Tools", "Backend"]
     },
     {
       "name": "Tailwind CSS",
