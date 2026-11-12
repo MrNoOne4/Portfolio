@@ -225,7 +225,7 @@ const Content = () => {
           whileInView="visible"
           viewport={revealViewport}
           transition={revealTransition}
-          className="mx-auto w-full max-w-5xl px-6"
+          className="mx-auto w-full max-w-[1500px] px-6"
         >
           <div className="mb-12 text-center">
             <p className="text-sm tracking-[0.25em] text-muted-foreground">
@@ -242,7 +242,7 @@ const Content = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div className="grid grid-cols-1 items-stretch gap-8 md:grid-cols-3">
             {projects.map((p, index: number) => (
               <motion.div
                 key={p.title}
@@ -254,13 +254,11 @@ const Content = () => {
                   ...revealTransition,
                   delay: (index % 2) * 0.15,
                 }}
+                className="h-full"
               >
-                <Card
-                  key={p.title}
-                  className="group overflow-hidden border-border bg-card pt-0 transition-all duration-300 hover:-translate-y-2 hover:border-foreground/30 hover:shadow-xl"
-                >
+                <Card className="group flex h-full flex-col overflow-hidden border-border bg-card pt-0 transition-all duration-300 hover:-translate-y-2 hover:border-foreground/30 hover:shadow-xl">
                   {/* Project Thumbnail */}
-                  <div className="relative overflow-hidden">
+                  <div className="relative shrink-0 overflow-hidden">
                     <img
                       src={p.thumbnail}
                       alt={p.title}
@@ -278,11 +276,12 @@ const Content = () => {
                   </div>
 
                   {/* Project Information */}
-                  <CardHeader className="gap-3">
+                  <CardHeader className="flex-1 gap-3">
                     <div>
                       <CardTitle className="text-center text-xl">
                         {p.title}
                       </CardTitle>
+
                       <CardDescription className="mt-2 leading-relaxed">
                         {p.description}
                       </CardDescription>
@@ -292,6 +291,7 @@ const Content = () => {
                     <div className="flex flex-wrap gap-2">
                       {p.tools.map(({ title, icon }) => {
                         const Icon = getIcon(icon)
+
                         return (
                           <Badge
                             key={title}
@@ -309,7 +309,7 @@ const Content = () => {
                   </CardHeader>
 
                   {/* Project Links */}
-                  <CardFooter className="flex gap-3">
+                  <CardFooter className="mt-auto flex gap-3">
                     <Button
                       className="flex-1"
                       onClick={() => setSelectedProject(p)}
@@ -488,8 +488,9 @@ const Content = () => {
 
           {/* Bottom Section */}
           <div className="flex flex-col-reverse gap-5 text-center sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-center text-xs text-muted-foreground flex gap-1">
-              <Copyright/> {new Date().getFullYear()} Mathew Demesa. All rights reserved.
+            <p className="flex gap-1 text-center text-xs text-muted-foreground">
+              <Copyright size={15}/> {new Date().getFullYear()} Mathew Demesa. All rights
+              reserved.
             </p>
 
             <div className="flex items-center justify-center gap-3 sm:justify-start">

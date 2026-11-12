@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react"
 import { LoaderIcon } from "lucide-react"
-import Header from "@/components/header";
-import DarkVeil from "@/components/DarkVeil";
-import Content from "@/components/content";
+import Header from "@/components/header"
+import DarkVeil from "@/components/DarkVeil"
+import Content from "@/components/content"
 
 export default function Page() {
   const [showHello, setShowHello] = useState(true)
@@ -32,15 +32,14 @@ export default function Page() {
           <div className="flex h-screen items-center justify-center">
             <LoaderIcon
               className={`animate-spin transition-all duration-[3000ms] ${
-                grow ? "size-32" : "size-4 "
+                grow ? "size-32" : "size-4"
               }`}
             />
-            
           </div>
         ) : (
           <div>
-              <Header/>
-              <Content/>
+            <Header />
+            <Content />
           </div>
         )}
       </div>

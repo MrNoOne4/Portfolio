@@ -373,8 +373,8 @@ export default function Navbar() {
 
             {/* FOOTER */}
             <div className="absolute right-6 bottom-8 left-6 flex items-center justify-between border-t border-border pt-4">
-              <span className="text-[10px] tracking-widest text-muted-foreground flex gap-2 items-center">
-                <Copyright/> {now.getFullYear()} MATHEW
+              <span className="text-[10px] tracking-widest text-muted-foreground flex gap-1 items-center">
+                <Copyright size={15}/> {now.getFullYear()} MATHEW
               </span>
 
               <span className="text-[10px] tracking-widest text-muted-foreground">

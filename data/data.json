@@ -262,6 +262,31 @@
         "/images/Brew17.png",
         "/images/Brew18.png"
       ]
+    },
+    {
+      "title": "Savora Food blog and recipe website",
+      "thumbnail": "/images/Savora1.png",
+      "description": "Savora is a responsive food blog where visitors can browse recipes by category, read detailed recipe pages with cooking time, servings, and difficulty, and subscribe to a newsletter or send a message through the contact form.",
+      "tools": [
+        "Next.js",
+        "TypeScript",
+        "React",
+        "Tailwind CSS",
+        "shadcn/ui",
+        "Lucide React",
+        "Vercel"
+      ],
+      "linkVercel": "https://savorablog.vercel.app/",
+      "linkGithub": "https://github.com/MrNoOne4/Blog",
+      "images": [
+        "/images/Savora1.png",
+        "/images/Savora2.png",
+        "/images/Savora3.png",
+        "/images/Savora4.png",
+        "/images/Savora5.png",
+        "/images/Savora6.png",
+        "/images/Savora7.png"
+      ]
     }
   ],
 
