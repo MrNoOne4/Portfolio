@@ -34,7 +34,8 @@ export interface Project {
   tools: ProjectTool[]
   linkVercel: string
   linkGithub: string
-  images: string[]
+  images: string[],
+  alreadyDone: boolean
 }
 
 export interface Social {
@@ -55,7 +56,6 @@ export const categories = raw.categories as CategoryItem[]
 export const tools = raw.tools as Tool[]
 export const socials = raw.socials as Social[]
 
-// Projects list tech by title; resolve each title to its icon once here
 const iconByTitle = new Map(raw.techStack.map((t) => [t.title, t.icon]))
 
 export const projects: Project[] = raw.projects.map((p) => ({
@@ -65,3 +65,4 @@ export const projects: Project[] = raw.projects.map((p) => ({
     icon: iconByTitle.get(title) ?? "Code",
   })),
 }))
+

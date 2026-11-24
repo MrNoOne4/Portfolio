@@ -267,12 +267,13 @@ const Content = () => {
 
                     <div className="absolute inset-0 bg-black/10 transition-colors duration-300 group-hover:bg-black/0" />
 
-                    <Badge
-                      variant="secondary"
-                      className="absolute top-4 left-4 backdrop-blur-md"
-                    >
-                      Web Development
-                    </Badge>
+                    <div className="absolute top-4 left-4 flex  gap-2">
+                      <Badge variant="secondary">Web Development</Badge>
+
+                      {!p.alreadyDone && (
+                        <Badge variant="destructive">Under development</Badge>
+                      )}
+                    </div>
                   </div>
 
                   {/* Project Information */}
@@ -489,8 +490,8 @@ const Content = () => {
           {/* Bottom Section */}
           <div className="flex flex-col-reverse gap-5 text-center sm:flex-row sm:items-center sm:justify-between">
             <p className="flex gap-1 text-center text-xs text-muted-foreground">
-              <Copyright size={15}/> {new Date().getFullYear()} Mathew Demesa. All rights
-              reserved.
+              <Copyright size={15} /> {new Date().getFullYear()} Mathew Demesa.
+              All rights reserved.
             </p>
 
             <div className="flex items-center justify-center gap-3 sm:justify-start">

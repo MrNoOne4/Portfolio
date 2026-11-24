@@ -55,7 +55,7 @@
     {
       "name": "RESTful API",
       "icon": "Network",
-      "description": "Enables communication between frontend and backend applications through HTTP methods and REST principles.",
+      "description": "Enables communication between frontend and backendfe applications through HTTP methods and REST principles.",
       "role": ["All", "Backend"]
     },
     {
@@ -193,9 +193,9 @@
 
   "projects": [
     {
-      "title": "Hotel reservation and Room management system",
+      "title": "Hotel reservation and room management system",
       "thumbnail": "/images/hotelThumbnail.png",
-      "description": "The Hotel Reservation and Room Management System allows customers to book rooms and process payments while helping hotel staff manage rooms, guests, reservations, check-ins, check-outs, and billing efficiently.",
+      "description": "A hotel management system with room reservations, payment processing, and tools for managing day-to-day hotel operations. It includes separate features for guests and staff, covering room availability, guest records, reservations, check-ins, check-outs, and billing.",
       "tools": [
         "Next.js",
         "TypeScript",
@@ -209,6 +209,7 @@
       ],
       "linkVercel": "https://hotel-reservation-n21f.vercel.app/userPage",
       "linkGithub": "https://github.com/MrNoOne4/HotelReservation",
+      "alreadyDone": true,
       "images": [
         "/images/hotelThumbnail.png",
         "/images/Hotel2.png",
@@ -228,9 +229,9 @@
       ]
     },
     {
-      "title": "Coffee & Snacks Ordering and Management Dashboard",
+      "title": "Coffees & snacks ordering and management dashboard",
       "thumbnail": "/images/brewCoffeeThumbnail.png",
-      "description": "A user-friendly dashboard that helps administrators manage coffee and snack menus, customer orders, products, pricing, and sales efficiently, ensuring smooth daily business operations.",
+      "description": "A management dashboard for a coffee and snacks business. It covers menu and product management, customer orders, pricing, and sales tracking, with everything organized in one place for easier day-to-day management.",
       "tools": [
         "Next.js",
         "TypeScript",
@@ -244,6 +245,7 @@
       ],
       "linkVercel": "https://brew-coffe-phi.vercel.app/brewCoffee",
       "linkGithub": "https://github.com/MrNoOne4/brewCoffee",
+      "alreadyDone": true,
       "images": [
         "/images/Brew1.png",
         "/images/Brew2.png",
@@ -264,20 +266,13 @@
       ]
     },
     {
-      "title": "Savora Food blog and recipe website",
+      "title": "Savora foods blog and recipe",
       "thumbnail": "/images/Savora1.png",
-      "description": "Savora is a responsive food blog where visitors can browse recipes by category, read detailed recipe pages with cooking time, servings, and difficulty, and subscribe to a newsletter or send a message through the contact form.",
-      "tools": [
-        "Next.js",
-        "TypeScript",
-        "React",
-        "Tailwind CSS",
-        "shadcn/ui",
-        "Lucide React",
-        "Vercel"
-      ],
+      "description": "A food blog featuring recipes across different categories, with dedicated pages for each recipe, including cooking time, servings, and difficulty. It also includes a newsletter subscription and contact form.",
+      "tools": ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
       "linkVercel": "https://savorablog.vercel.app/",
       "linkGithub": "https://github.com/MrNoOne4/Blog",
+      "alreadyDone": true,
       "images": [
         "/images/Savora1.png",
         "/images/Savora2.png",
@@ -286,6 +281,30 @@
         "/images/Savora5.png",
         "/images/Savora6.png",
         "/images/Savora7.png"
+      ]
+    },
+    {
+      "title": "Atelier clothing store",
+      "thumbnail": "/images/ECommorse/Atelier1.png",
+      "description": "An online clothing store featuring tops, jackets, and pants, with product filtering, shopping cart, checkout, and customer accounts for managing orders, addresses, and wishlists. The storefront and database structure.",
+      "tools": [
+        "Next.js",
+        "TypeScript",
+        "React",
+        "Tailwind CSS",
+        "shadcn/ui",
+        "Prisma",
+        "MySQL",
+        "Vercel"
+      ],
+      "linkVercel": "https://next-e-commorse.vercel.app/",
+      "linkGithub": "https://github.com/MrNoOne4/NextECommorse",
+      "alreadyDone": false,
+      "images": [
+        "/images/ECommorse/Atelier1.png",
+        "/images/ECommorse/Atelier2.png",
+        "/images/ECommorse/Atelier3.png",
+        "/images/ECommorse/Atelier4.png"
       ]
     }
   ],
@@ -324,6 +343,8 @@
     { "name": "Certificate 4", "image": "/images/Certificate4.png" },
     { "name": "Certificate 5", "image": "/images/Certificate5.png" },
     { "name": "Certificate 6", "image": "/images/Certificate6.png" },
-    { "name": "Certificate 7", "image": "/images/Certificate7.png" }
+    { "name": "Certificate 7", "image": "/images/Certificate7.png" },
+    { "name": "Certificate 8", "image": "/images/Certificate8.png" },
+    { "name": "Certificate 9", "image": "/images/Certificate9.png" }
   ]
 }
